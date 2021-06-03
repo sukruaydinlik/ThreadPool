@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 //============================================================================
-//Name        : FactoryMethod.cpp
+//Name        : FactoryMethod
 //
 //The classes and/or objects participating in this pattern are:
-//1. Product  (Engine,Transmission - Abstract)
+//1. Product  (Thread - Abstract)
 //	 Defines the interface of objects the factory method creates
-//2. ConcreteProduct  (OPEL_Engine, OPEL_Transmission)
+//2. ConcreteProduct  (ThreadConcreteProduct)
 //	 Implements the Product interface
-//3. Creator  (CarCreator)
+//3. Creator  (ThreadCreator)
 //	 Declares the factory method, which returns an object of type Product.
 //	 Creator may also define a default implementation of the factory method
 //	 that returns a default ConcreteProduct object.
@@ -56,7 +56,7 @@ class OPEL_Transmission extends Transmission {
 
 //An 'Abstract Creator' class
 //--> CarCreator
-abstract class CarCreator {
+abstract class ThreadCreator {
     // Object creation is delegated to factory.
     abstract public Engine createEngine();
     abstract public Transmission createTransmission();
@@ -73,9 +73,9 @@ abstract class CarCreator {
     private ArrayList<Part> parts;
 }
 
-//A 'ConcreteCreator' class ---> OPELCreator
+//A 'ConcreteCreator' class ---> ConcreteCreator
 
-class  OPELCreator extends CarCreator {
+class ConcreteCreator extends ThreadCreator {
     // Factory Method implementation
     // We are overriding the factory method
     public OPEL_Engine createEngine() {
@@ -93,7 +93,7 @@ public class Factory {
     //Entry point into main application.
     public static void main(String[] args) {
         // Create an OPELcar.
-        CarCreator creator = new OPELCreator();
+        ThreadCreator creator = new ConcreteCreator();
         System.out.println("Creating OPEL");
         creator.createCar();
         creator.displayParts();
