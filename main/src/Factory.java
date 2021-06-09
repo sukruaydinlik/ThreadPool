@@ -12,7 +12,7 @@ import java.util.ArrayList;
 //	 Creator may also define a default implementation of the factory method
 //	 that returns a default ConcreteProduct object.
 //	 May call the factory method to create a Product object.
-//4. ConcreteCreator (OPELCreator)
+//4. ConcreteCreator (ConcreteCreator)
 //	 Overrides the factory method to return an instance of a ConcreteProduct.
 //============================================================================
 
