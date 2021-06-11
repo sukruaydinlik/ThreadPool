@@ -1,140 +1,208 @@
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-
-interface  ThreadPool {
-    public void IDLE();
-        public void  BUSY();
+interface Threadpool {
+    public void MakeIDLE();
+    public void MakeBusy();
 }
-
-class  TPConvert implements ThreadPool {
-
-    public  TPConvert (Converter Converter , int  PL , int ALLoc ,String ET)
-    {
-        _Converter = Converter;
-        _PriorityLEvel = PL;
-        _Alloc = ALLoc;
-        _EntryTable = ET;
-
-    }
-
-
-    public void IDLE() {
-        _Converter.Convert(_PriorityLEvel,_Alloc,_EntryTable);
-
+//"ConcreteCommand"
+//
+class TPConverter implements Threadpool {
+    // Constructor
+    public TPConverter(Converter converter, char PriorityLevel, int Alloc) {
+        _converter = converter;
+        _PriorityLevel = PriorityLevel;
+        _Alloc = Alloc;
 
     }
 
-
-    public void BUSY() {
-        _Converter.Convert(_PriorityLEvel,_Alloc,_EntryTable);
+    public void MakeIDLE() {
+        _converter.IDLE(_PriorityLevel, _Alloc);
     }
 
-    private  int _PriorityLEvel;
-    private int  _Alloc;
-    private String  _EntryTable ;
-    private  Converter _Converter;
+    public void MakeBusy() {
+        _converter.BUSY(_PriorityLevel, _Alloc);
+    }
 
 
+    //aloow priority
 
 
-
+    private Converter _converter;
+    private char _PriorityLevel;
+    private int _Alloc;
 
 }
+// "Receiver"
+//
 class Converter {
     public Converter() {
-        current_Status = "Empty ";
+        current_value = 0;
+        Alloc = 0;
+        PriorityLevel = 0;
+
+    }
+
+    public void IDLE(char _PriorityLevel, int _Alloc) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 6 ; j++) {
+                if (j == i) {
+                    System.out.println("Assign Complete ");
+                        BUSY('âœ“',i);
+                }
+            }
+            System.out.println("Current Alloc " + Alloc + " (Assign to  "
+                    + _PriorityLevel + " Level of  " + PriorityLevel +i+ ")");
+        }
+    }
+
+
+    public void BUSY(char _PriorityLevel, int _Alloc) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (j == i) {
+                    System.out.println("Assign Denied");
+                  //  IDLE('x',j);
+                }
+            }
+
+            System.out.println("Current Alloc " + Alloc + " (Assign to  "
+                    + _PriorityLevel + " Level of  " + PriorityLevel +i+ ")");
+        }
+    }
+    private char PriorityLevel;
+    private int Alloc;
+    private int current_value;
 }
-    public  void Convert(int  _priorityLEvel , int _Alloc,String _EntryTable){
 
-        Scanner in = new Scanner(System.in);
-        int N = in.nextInt();
-        String ET  = _EntryTable;
-        for (int i = 0; i < N; i++) {
-
-            int  priortyLEvel = _priorityLEvel;
-            int Alloc = _Alloc;
-
-
-            int HighLevelThread = 512;
-            int LowLEvelThread = 256 ;
-            String  HLS = Integer.toString(HighLevelThread);
-            String  LLS = Integer.toString(LowLEvelThread);
+// "Invoker"
+class User {
+    public User() {	Status = 0; }
 
 
 
 
-            while (N >1 )
-            {
-                if (_Attributes.size()<Alloc) {
-                    if (priortyLEvel < 1) {
-                        _Attributes.add(1, "Priority Level  = 1 " + HLS);
-                    } else if (priortyLEvel < 2) {
-                        _Attributes.add(2, "Priority Level  = 2");
-                    } else if (priortyLEvel < 3) {
-                        _Attributes.add(3, "Priority Level  = 3");
-                    } else if (priortyLEvel < 4) {
 
-                        _Attributes.add(4, "Priority Level  = 4");
-                    } else {
-                        _Attributes.add(5, "Priority Level  = 5" + LLS);
-                    }
+    public void IDLE(int levels) {
+
+
+            System.out.println("Create IDLE");
+
+            for (int i = 0; i < levels; i++) {
+
+                int priority = 0;
+                int Alloc = _EntryTable.size();
+
+                if (priority < 1 && Alloc < 4) {
+                    Threadpool TP = null;
+                    System.out.println("512 - Heavy Loads");
+                    Compute(TP);
+                }
+                if (priority < 2 && Alloc < 3) {
+                    Threadpool TP = null;
+                    Compute(TP);
+                }
+                if (priority < 3 && Alloc < 2) {
+                    Threadpool TP = null;
+                    Compute(TP);
+                }
+                if (priority < 4 && Alloc < 1) {
+                    Threadpool TP = null;
+                    Compute(TP);
+                }
+                if (priority < 5 && Alloc < 0) {
+                    Threadpool TP = null;
+                    System.out.println("512 - Light Loads");
+                    Compute(TP);
+                }
+
+
+                if (Status < _EntryTable.size()) {
+                    Threadpool TP1 = _EntryTable.get(Status++);
+                    TP1.MakeIDLE();
                 }
             }
         }
 
-        System.out.println( "Entry LEvel of " + ET + " ' s  Attributes are  Convert to "+current_Status);
+
+    public void BUSY(int levels) {
+    for (int i = 0; i < levels; i++) {
+
+        int PriorityLEvel = 0;
+        int Alloc = _EntryTable.size();
+
+        System.out.println( "Create Busy");
 
 
-
-
-    }
-    
-    
-
-    //private   ArrayList<ThreadPool> ThreadPoll = new ArrayList<ThreadPool>();
-
-    private ArrayList<String> _Attributes = new ArrayList<String>();
-
-
-
-
-private String current_Status;
-
-}
-//Invoker
-class ThreadPoolMAker{
-    public  ThreadPoolMAker() { Flag = 0;}
-    public void  MakeIDLE(int Status)
-    {
-        for (int i = 0; i < Status; i++) {
-            //DEðiþceke
-            if ( i < 3){
-            }
-
+        if (PriorityLEvel < 1 && Alloc < 4 ) {
+            Threadpool TP = null;
+            System.out.println("512 - Heavy Loads ");
+            Compute(TP);
         }
-        
-        System.out.println( "Making the Thread IDLE ...");
+        if (PriorityLEvel < 2 && Alloc < 3 ) {
+            Threadpool TP = null;
+            Compute(TP);
+        }
+        if (PriorityLEvel < 3 && Alloc < 2 ) {
+            Threadpool TP = null;
+            Compute(TP);
+        }
+        if (PriorityLEvel < 4 && Alloc < 1) {
+            Threadpool TP = null;
+            Compute(TP);
+        }
+        if (PriorityLEvel < 5 && Alloc < 0 ) {
+            Threadpool TP = null;
+            System.out.println("512 - Light Loads ");
+            Compute(TP);
+        }
+
+            if (Status > 0) {
+                Threadpool TP = _EntryTable.get(--Status);
+                TP.MakeBusy();
+            }
+        if (Status > 0) {
+            Threadpool TP = _EntryTable.get(Status++);
+            TP.MakeIDLE();
+        }
+        }
+    }
+    void Compute(Threadpool TP) {
+        TP.MakeIDLE();
+        // Add command to undo list
+        _EntryTable.add(TP);
+        Status++;
     }
 
-    public void MakeBusy(int Status)
-    {
-        System.out.println( "Making the Thread BUSY ...");
-    }
+    // Initializers.
+    private int Status;
+    private ArrayList<Threadpool> _EntryTable = new ArrayList<Threadpool>();
 
+};
 
-    private ArrayList<String> _Attributes = new ArrayList<String>();
-    private int Flag;
-}
-
-
-
-public class Main {
-
+public class CommandPattern {
     public static void main(String[] args) {
-	// write your code here
+
+        // Create user and let her compute
+        Threadpool command = null;
+        User user = new User();
+        Converter converter = new Converter();
+
+        command = new TPConverter(converter, '1', 5 );
+        user.Compute(command);
+        command = new TPConverter(converter, '2', 4 );
+        user.Compute(command);
+        command = new TPConverter(converter, '3', 3 );
+        user.Compute(command);
+        command = new TPConverter(converter, '4', 2 );
+        user.Compute(command);
+        command = new TPConverter(converter, '5', 1 );
+        user.Compute(command);
+
+        // Undo 4 commands
+        user.BUSY(4);
+        // Redo 2 commands
+        user.IDLE(2);
     }
 }
-
-//ARRAY LISTE BAKILCAK 
-//INVOKER YAPILCAk
