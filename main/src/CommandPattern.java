@@ -6,6 +6,7 @@ interface Threadpool {
     public void MakeIDLE();
     public void MakeBusy();
 }
+
 //"ConcreteCommand"
 //
 class TPConverter implements Threadpool {
