@@ -7,5 +7,8 @@ public class Main {
             System.out.println(taskFactory.getTask().toString());
 
         }
+        ThreadRepo threadRepo = new ThreadRepo();
+
+
     }
 }
