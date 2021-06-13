@@ -1,3 +1,6 @@
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 interface TaskInterface {
     public void displayInfo();
@@ -83,15 +86,37 @@ class BigTask implements TaskInterface {
 }
 
 public class TaskFactory {
+    private SecureRandom secureRandom;
+    private ArrayList<String> taskPool;
 
-    public TaskInterface getSmallTask(int type, String description) {
-        if (type == 0) {
+    public TaskFactory() {
+        secureRandom = new SecureRandom();
+        taskPool = new ArrayList<String>();
+        fillList();
+    }
+
+    public TaskInterface getTask() {
+        int random = secureRandom.nextInt(10);
+        String description = taskPool.get(random);
+
+//        System.out.println(random);
+        if (random < 5) {
             return new SmallTask(5, description);
-        } else if (type == 1) {
+        } else {
             return new BigTask(1, description);
-        }else{
-            System.out.println("Incorrect type entered. Type 0 for SmallTask and type 1 for BigTask");
-            return null;
         }
+    }
+
+    private void fillList() {
+        taskPool.add("Run CSGO");
+        taskPool.add("Compile a Java code");
+        taskPool.add("Run Java code");
+        taskPool.add("Run Android Studio");
+        taskPool.add("Clean Memory");
+        taskPool.add("Open file");
+        taskPool.add("Install driver");
+        taskPool.add("Open Chrome Web Browser");
+        taskPool.add("Open Die Hard.mp4");
+        taskPool.add("Play music");
     }
 }
