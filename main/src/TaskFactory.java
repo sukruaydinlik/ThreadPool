@@ -1,6 +1,5 @@
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 interface TaskInterface {
     public void displayInfo();

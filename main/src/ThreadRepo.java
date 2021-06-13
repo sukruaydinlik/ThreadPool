@@ -12,7 +12,7 @@ interface Iterator {
 
 
 public class ThreadRepo implements Container {
-    public ArrayList<Thread> threads ;
+    private ArrayList<Thread> threads ;
 
     public ThreadRepo() {
         this.threads = new ArrayList<Thread>();
@@ -22,6 +22,14 @@ public class ThreadRepo implements Container {
     public Iterator getIterator() {
 
         return new ThreadIterator();
+    }
+
+    public ArrayList<Thread> getThreads() {
+        return threads;
+    }
+
+    public void setThreads(ArrayList<Thread> threads) {
+        this.threads = threads;
     }
 
     private class ThreadIterator implements Iterator {
