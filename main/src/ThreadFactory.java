@@ -1,14 +1,13 @@
-import java.security.SecureRandom;
 import java.util.ArrayList;
 
 interface ThreadInterface extends Runnable {
     public void displayInfo();
 }
 
-class SmallThread implements ThreadInterface {
+class LThread implements ThreadInterface {
     private TaskInterface task;
 
-    public SmallThread(TaskInterface task) {
+    public LThread(TaskInterface task) {
         this.task = task;
     }
 
@@ -31,10 +30,10 @@ class SmallThread implements ThreadInterface {
     }
 }
 
-class BigThread implements ThreadInterface {
+class HThread implements ThreadInterface {
     private TaskInterface task;
 
-    public BigThread(TaskInterface task) {
+    public HThread(TaskInterface task) {
         this.task = task;
     }
 
@@ -65,16 +64,13 @@ public class ThreadFactory {
         taskPool = new ArrayList<String>();
     }
 
-//    public ThreadInterface getTask() {
-//        int random = secureRandom.nextInt(10);
-//        String description = taskPool.get(random);
-//
-////        System.out.println(random);
-//        if (random < 5) {
-//            return new SmallThread(5, description);
-//        } else {
-//            return new BigThread(1, description);
-//        }
-//    }
+public ThreadInterface getThread(int priority, TaskInterface task) {
+
+        if (priority == 5) {
+            return new LThread(task);
+        } else {
+            return new HThread(task);
+        }
+    }
 
 }

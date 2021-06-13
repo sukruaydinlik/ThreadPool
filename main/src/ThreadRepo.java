@@ -12,25 +12,25 @@ interface Iterator {
 
 
 public class ThreadRepo implements Container {
-    private ArrayList<Thread> threads ;
+    private ArrayList<ThreadInterface> threads;
+
+    public ArrayList<ThreadInterface> getThreads() {
+        return threads;
+    }
+
+    public void setThreads(ArrayList<ThreadInterface> threads) {
+        this.threads = threads;
+    }
 
     public ThreadRepo() {
-        this.threads = new ArrayList<Thread>();
+        this.threads = new ArrayList<ThreadInterface>();
     }
 
     @Override
     public Iterator getIterator() {
-
         return new ThreadIterator();
     }
 
-    public ArrayList<Thread> getThreads() {
-        return threads;
-    }
-
-    public void setThreads(ArrayList<Thread> threads) {
-        this.threads = threads;
-    }
 
     private class ThreadIterator implements Iterator {
 

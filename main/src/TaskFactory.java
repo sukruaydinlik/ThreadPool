@@ -1,11 +1,24 @@
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
-interface TaskInterface {
-    public void displayInfo();
+abstract class TaskInterface {
+    int priorityLevel = 0;
+    String description = "";
+
+    public int getPriorityLevel() {
+        return priorityLevel;
+    }
+
+    public void setPriorityLevel(int priorityLevel) {
+        this.priorityLevel = priorityLevel;
+    }
+
+    void displayInfo() {
+
+    }
 }
 
-class SmallTask implements TaskInterface {
+class SmallTask extends TaskInterface {
     private int priorityLevel;
     private String description;
 
@@ -45,7 +58,7 @@ class SmallTask implements TaskInterface {
     }
 }
 
-class BigTask implements TaskInterface {
+class BigTask extends TaskInterface {
     private int priorityLevel;
     private String description;
 
@@ -99,7 +112,7 @@ public class TaskFactory {
         String description = taskPool.get(random);
 
 //        System.out.println(random);
-        if (random < 5) {
+        if (random > 4) {
             return new SmallTask(5, description);
         } else {
             return new BigTask(1, description);
