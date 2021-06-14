@@ -47,7 +47,6 @@ public class ThreadRepo implements Container {
 
         @Override
         public Object next() {
-
             if (this.hasNext()) {
                 return threads.get(index++);
             }

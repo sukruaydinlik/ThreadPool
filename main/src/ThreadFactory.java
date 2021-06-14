@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 interface ThreadInterface extends Runnable {
@@ -27,6 +28,7 @@ class LThread implements ThreadInterface {
     @Override
     public void run() {
         System.out.println("Executing task " + task.toString() +".");
+        task.displayInfo();
     }
 }
 
