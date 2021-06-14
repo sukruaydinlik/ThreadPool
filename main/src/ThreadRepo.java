@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * This file simulates a thread queue by using
+ * Iterator Pattern
+ */
+
 interface Container {
     Iterator getIterator();
 }
@@ -12,18 +17,16 @@ interface Iterator {
 
 
 public class ThreadRepo implements Container {
-    private ArrayList<ThreadInterface> threads;
+    private ThreadInterface[] threads;
 
-    public ArrayList<ThreadInterface> getThreads() {
+    public ThreadInterface[] getThreads() {
         return threads;
     }
 
-    public void setThreads(ArrayList<ThreadInterface> threads) {
-        this.threads = threads;
-    }
-
     public ThreadRepo() {
-        this.threads = new ArrayList<ThreadInterface>();
+
+        // Specified number of threads is 50
+        this.threads = new ThreadInterface[50];
     }
 
     @Override
@@ -39,7 +42,7 @@ public class ThreadRepo implements Container {
         @Override
         public boolean hasNext() {
 
-            if (index < threads.size()) {
+            if (index < threads.length) {
                 return true;
             }
             return false;
@@ -48,7 +51,7 @@ public class ThreadRepo implements Container {
         @Override
         public Object next() {
             if (this.hasNext()) {
-                return threads.get(index++);
+                return threads[index++];
             }
             return null;
         }

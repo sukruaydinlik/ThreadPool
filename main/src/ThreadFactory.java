@@ -1,6 +1,10 @@
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+/**
+ * This file simulates a thread creator
+ * using factory pattern
+ */
 interface ThreadInterface extends Runnable {
     TaskInterface getTask();
     void displayInfo();
@@ -63,7 +67,6 @@ public class ThreadFactory {
     private ArrayList<String> taskPool;
 
     public ThreadFactory() {
-//        secureRandom = new SecureRandom();
         taskPool = new ArrayList<String>();
     }
 

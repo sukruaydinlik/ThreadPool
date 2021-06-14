@@ -1,16 +1,17 @@
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
+
+/**
+ * This file chooses given jobs and
+ * creates a task by benefiting from
+ * Factory Pattern
+ */
 abstract class TaskInterface {
     int priorityLevel = 0;
-    String description = "";
 
     public int getPriorityLevel() {
         return priorityLevel;
-    }
-
-    public void setPriorityLevel(int priorityLevel) {
-        this.priorityLevel = priorityLevel;
     }
 
     void displayInfo() {

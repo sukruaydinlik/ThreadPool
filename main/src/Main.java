@@ -8,6 +8,8 @@ public class Main {
         ThreadRepo threadRepo = new ThreadRepo();
         ThreadFactory threadFactory = new ThreadFactory();
         ThreadPoolExecutingService tpes = new ThreadPoolExecutingService();
+
+
         for (int i = 0; i < 50; i++) {
 
             // Create random task.
@@ -18,22 +20,21 @@ public class Main {
             ThreadInterface ti = threadFactory.getThread(priority, task);
 
             // Add thread to thread repo, or in this case: ThreadPool.
-            threadRepo.getThreads().add(ti);
+            threadRepo.getThreads()[i] = ti;
 
         }
 
         for (Iterator iterator = threadRepo.getIterator(); iterator.hasNext(); ) {
             ThreadInterface thread = (ThreadInterface) iterator.next();
 
-            if(thread.getTask().getPriorityLevel()==1) {
+            if (thread.getTask().getPriorityLevel() == 1) {
                 RunHThreads rht = new RunHThreads(thread);
                 tpes.takeOrder(rht);
-            }else{
+            } else {
                 RunLThreads rlt = new RunLThreads(thread);
                 tpes.takeOrder(rlt);
             }
         }
         tpes.placeOrders();
-        //executorService.shutdown();
     }
 }
