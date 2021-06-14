@@ -2,7 +2,8 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 interface ThreadInterface extends Runnable {
-    public void displayInfo();
+    TaskInterface getTask();
+    void displayInfo();
 }
 
 class LThread implements ThreadInterface {
@@ -22,7 +23,7 @@ class LThread implements ThreadInterface {
 
     @Override
     public void displayInfo() {
-        System.out.println(task.toString());
+        System.out.println("LThread created. "+task.toString());
     }
 
     @Override
@@ -49,7 +50,7 @@ class HThread implements ThreadInterface {
 
     @Override
     public void displayInfo() {
-        System.out.println(task.toString());
+        System.out.println("HThread created. "+task.toString());
     }
 
     @Override
