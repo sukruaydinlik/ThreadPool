@@ -1,5 +1,3 @@
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,13 +26,16 @@ public class Main {
             ThreadInterface thread = (ThreadInterface) iterator.next();
 
             if (thread.getTask().getPriorityLevel() == 1) {
-                RunHThreads rht = new RunHThreads(thread);
+                Order rht = new RunHThreads(thread);
                 tpes.takeOrder(rht);
             } else {
-                RunLThreads rlt = new RunLThreads(thread);
+                Order rlt = new RunLThreads(thread);
                 tpes.takeOrder(rlt);
             }
         }
         tpes.placeOrders();
+
+
+
     }
 }
